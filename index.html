@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cat House</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+
+    <header class="game-header">
+
+        <h1>🐱 Cat House </h1>
+
+        <div class="stats">
+
+            <div>
+                🪙 Coins:
+                <span id="coins">500</span>
+            </div>
+
+            <div>
+                ❤️ Happiness:
+                <span id="happiness">50</span>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- Main Game -->
+
+    <main class="game-container">
+
+
+        <!-- Cat Room -->
+
+        <section class="room-container">
+
+            <h2>My Cat's Room</h2>
+
+            <div
+                id="room"
+                class="room"
+            >
+
+                <!-- Cat -->
+
+                <div
+                    id="cat"
+                    class="cat"
+                >
+                    🐱
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Furniture Shop -->
+
+        <section class="shop">
+
+            <h2>🛍️ Furniture Shop</h2>
+
+
+            <div class="furniture-list">
+
+
+                <!-- Bed -->
+
+                <div
+                    class="furniture-item"
+                    draggable="true"
+                    data-name="Bed"
+                    data-price="100"
+                    data-happiness="10"
+                >
+
+                    <div class="furniture-icon">
+                        🛏️
+                    </div>
+
+                    <div>
+                        <strong>Bed</strong>
+                        <p>🪙 100</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Cat Tree -->
+
+                <div
+                    class="furniture-item"
+                    draggable="true"
+                    data-name="Cat Tree"
+                    data-price="150"
+                    data-happiness="15"
+                >
+
+                    <div class="furniture-icon">
+                        🌳
+                    </div>
+
+                    <div>
+                        <strong>Cat Tree</strong>
+                        <p>🪙 150</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Toy -->
+
+                <div
+                    class="furniture-item"
+                    draggable="true"
+                    data-name="Toy"
+                    data-price="50"
+                    data-happiness="5"
+                >
+
+                    <div class="furniture-icon">
+                        🧶
+                    </div>
+
+                    <div>
+                        <strong>Toy</strong>
+                        <p>🪙 50</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Food Bowl -->
+
+                <div
+                    class="furniture-item"
+                    draggable="true"
+                    data-name="Food Bowl"
+                    data-price="80"
+                    data-happiness="8"
+                >
+
+                    <div class="furniture-icon">
+                        🍽️
+                    </div>
+
+                    <div>
+                        <strong>Food Bowl</strong>
+                        <p>🪙 80</p>
+                    </div>
+
+                </div>
+
+
+                <!-- Window -->
+
+                <div
+                    class="furniture-item"
+                    draggable="true"
+                    data-name="Window"
+                    data-price="120"
+                    data-happiness="12"
+                >
+
+                    <div class="furniture-icon">
+                        🪟
+                    </div>
+
+                    <div>
+                        <strong>Window</strong>
+                        <p>🪙 120</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
