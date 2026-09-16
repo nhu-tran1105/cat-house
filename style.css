@@ -208,6 +208,11 @@ body {
     z-index: 5;
 }
 
+.placed-furniture:hover {
+    transform: scale(1.1);
+    filter: brightness(1.1);
+}
+
 
 /* Room highlight when dragging */
 
@@ -216,4 +221,77 @@ body {
     outline: 5px dashed #c58b6d;
 
     outline-offset: -10px;
+}
+
+/* =========================
+   CAT SELECTION
+========================= */
+
+.cat-selection {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.cat-selection h2 {
+    margin-top: 0;
+}
+
+
+.cat-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+.cat-option {
+    width: 150px;
+    padding: 15px;
+
+    border: 2px solid #ead8c8;
+    border-radius: 15px;
+
+    background: #f8dfcf;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.cat-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+.cat-option.selected {
+    border: 3px solid #c58b6d;
+    background: #f3cdb7;
+}
+
+
+.cat-option span {
+    display: block;
+    font-size: 55px;
+    margin-bottom: 8px;
+}
+
+
+.cat-option strong {
+    display: block;
+    font-size: 18px;
+}
+
+
+.cat-option small {
+    display: block;
+    margin-top: 5px;
+    color: #765c4d;
 }

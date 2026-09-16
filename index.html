@@ -16,7 +16,7 @@
 
     <header class="game-header">
 
-        <h1>🐱 Cat House </h1>
+        <h1> Cat House </h1>
 
         <div class="stats">
 
@@ -40,29 +40,73 @@
     <main class="game-container">
 
 
-        <!-- Cat Room -->
+ <!-- Cat Room -->
 
-        <section class="room-container">
+<section class="room-container">
 
-            <h2>My Cat's Room</h2>
+    <h2>My Cat's Room</h2>
 
-            <div
-                id="room"
-                class="room"
+    <div id="room" class="room">
+
+        <div id="cat" class="cat">
+            🐱
+        </div>
+
+    </div>
+
+</section>
+
+
+    <!-- Cat Selection -->
+
+    <section class="cat-selection">
+
+        <h2>🐾 Choose Your Cat</h2>
+
+        <div class="cat-list">
+
+            <button
+                class="cat-option"
+                data-cat="Lem"
+                data-icon="🐈"
+                data-personality="Calm"
             >
+                <span>🐈</span>
+                <strong>Lem</strong>
+                <small>Calm</small>
+            </button>
 
-                <!-- Cat -->
 
-                <div
-                    id="cat"
-                    class="cat"
-                >
-                    🐱
-                </div>
+            <button
+                class="cat-option"
+                data-cat="Den"
+                data-icon="🐈‍⬛"
+                data-personality="Playful"
+            >
+                <span>🐈‍⬛</span>
+                <strong>Den</strong>
+                <small>Playful</small>
+            </button>
 
-            </div>
 
-        </section>
+            <button
+                class="cat-option"
+                data-cat="Cheese"
+                data-icon="🐅"
+                data-personality="Friendly"
+            >
+                <span>🐅</span>
+                <strong>Cheese</strong>
+                <small>Friendly</small>
+            </button>
+
+        </div>
+
+        <p id="cat-message">
+            Choose a cat to start designing their house!
+        </p>
+
+    </section>
 
 
         <!-- Furniture Shop -->
