@@ -1,7 +1,8 @@
 let coins = 500;
-let happiness = 50;
-
+let happiness = 0;
+let level = 1;
 let currentCat = null;
+let pendingCoins = 0;
 
 
 /* =========================
@@ -30,6 +31,9 @@ const cats = {
    ELEMENTS
 ========================= */
 
+const levelDisplay =
+    document.getElementById("level");
+
 const coinsDisplay =
     document.getElementById("coins");
 
@@ -51,6 +55,15 @@ const catOptions =
 const furnitureItems =
     document.querySelectorAll(".furniture-item");
 
+const earnCoinsButton =
+    document.getElementById("earn-coins");
+
+const pendingCoinsDisplay =
+    document.getElementById("pending-coins");
+
+const restartGameButton =
+    document.getElementById("restart-game");
+
 
 /* =========================
    CAT SELECTION
@@ -60,17 +73,11 @@ catOptions.forEach(option => {
 
     option.addEventListener("click", () => {
 
-        /* Remove old selection */
-
         catOptions.forEach(item => {
             item.classList.remove("selected");
         });
 
-
-        /* Select new cat */
-
         option.classList.add("selected");
-
 
         const catName =
             option.dataset.cat;
@@ -81,30 +88,18 @@ catOptions.forEach(option => {
         const personality =
             option.dataset.personality;
 
-
-        /* Save current cat */
-
         currentCat = catName;
 
-
-        /* Change cat */
-
         cat.textContent = catIcon;
-
-
-        /* Find favorite */
 
         const favorite =
             cats[catName].favorite;
 
-
-        /* Update message */
-
         catMessage.textContent =
             `${catName} is ${personality}! Favorite: ${favorite} ❤️`;
 
+        saveGame();
     });
-
 });
 
 
@@ -115,6 +110,14 @@ catOptions.forEach(option => {
 furnitureItems.forEach(item => {
 
     item.addEventListener("dragstart", event => {
+
+        const requiredLevel =
+            Number(item.dataset.level);
+
+        if (level < requiredLevel) {
+            event.preventDefault();
+            return;
+        }
 
         event.dataTransfer.setData(
             "type",
@@ -140,9 +143,7 @@ furnitureItems.forEach(item => {
             "icon",
             item.querySelector(".furniture-icon").textContent
         );
-
     });
-
 });
 
 
@@ -155,7 +156,6 @@ room.addEventListener("dragover", event => {
     event.preventDefault();
 
     room.classList.add("drag-over");
-
 });
 
 
@@ -166,7 +166,6 @@ room.addEventListener("dragover", event => {
 room.addEventListener("dragleave", () => {
 
     room.classList.remove("drag-over");
-
 });
 
 
@@ -179,7 +178,6 @@ room.addEventListener("drop", event => {
     event.preventDefault();
 
     room.classList.remove("drag-over");
-
 
     const type =
         event.dataTransfer.getData("type");
@@ -207,6 +205,7 @@ room.addEventListener("drop", event => {
                 event.clientY
             );
 
+            saveGame();
         }
 
         return;
@@ -234,7 +233,9 @@ room.addEventListener("drop", event => {
         event.dataTransfer.getData("icon");
 
 
-    /* Check coins */
+    /* =========================
+       CHECK COINS
+    ========================= */
 
     if (coins < price) {
 
@@ -244,13 +245,15 @@ room.addEventListener("drop", event => {
     }
 
 
-    /* Spend coins */
+    /* =========================
+       SPEND COINS
+    ========================= */
 
     coins -= price;
 
 
     /* =========================
-       HAPPINESS
+       CALCULATE HAPPINESS
     ========================= */
 
     let happinessEarned =
@@ -269,14 +272,15 @@ room.addEventListener("drop", event => {
         alert(
             `${currentCat} loves this! ❤️ +10 bonus happiness!`
         );
-
     }
 
 
     happiness += happinessEarned;
 
 
-    /* Update UI */
+    /* =========================
+       UPDATE UI
+    ========================= */
 
     coinsDisplay.textContent =
         coins;
@@ -300,13 +304,16 @@ room.addEventListener("drop", event => {
         icon;
 
 
-    /* Save furniture data */
+    /* Unique ID */
 
     furniture.dataset.id =
         "furniture-" +
         Date.now() +
         "-" +
         Math.random();
+
+
+    /* Save furniture information */
 
     furniture.dataset.price =
         price;
@@ -322,7 +329,7 @@ room.addEventListener("drop", event => {
     );
 
 
-    /* Position */
+    /* Position furniture */
 
     moveFurniture(
         furniture,
@@ -331,12 +338,14 @@ room.addEventListener("drop", event => {
     );
 
 
-    /* =========================
-       MAKE MOVABLE
-    ========================= */
+    /* Make furniture movable */
 
     furniture.draggable = true;
 
+
+    /* =========================
+       MOVE FURNITURE
+    ========================= */
 
     furniture.addEventListener(
         "dragstart",
@@ -351,13 +360,12 @@ room.addEventListener("drop", event => {
                 "id",
                 furniture.dataset.id
             );
-
         }
     );
 
 
     /* =========================
-       DELETE
+       DELETE FURNITURE
     ========================= */
 
     furniture.addEventListener(
@@ -382,6 +390,13 @@ room.addEventListener("drop", event => {
             happiness -= happinessValue;
 
 
+            /* Remove furniture FIRST */
+
+            furniture.remove();
+
+
+            /* Update UI */
+
             coinsDisplay.textContent =
                 coins;
 
@@ -389,11 +404,25 @@ room.addEventListener("drop", event => {
                 happiness;
 
 
-            furniture.remove();
+            updateLevel();
 
+            saveGame();
         }
     );
 
+
+    /* =========================
+       UPDATE LEVEL
+    ========================= */
+
+    updateLevel();
+
+
+    /* =========================
+       SAVE AFTER FURNITURE EXISTS
+    ========================= */
+
+    saveGame();
 });
 
 
@@ -444,16 +473,46 @@ function moveFurniture(
 
     furniture.style.top =
         `${y}px`;
-
 }
 
+
 /* =========================
-   EARN COINS
+   PASSIVE COIN SYSTEM
 ========================= */
 
-const earnCoinsButton =
-    document.getElementById("earn-coins");
+setInterval(() => {
 
+    if (!currentCat) {
+        return;
+    }
+
+
+    const reward =
+        Math.max(
+            5,
+            Math.floor(happiness / 10)
+        );
+
+
+    pendingCoins += reward;
+
+
+    pendingCoinsDisplay.textContent =
+        `+${pendingCoins} 🪙`;
+
+
+    catMessage.textContent =
+        `${currentCat} earned ${reward} coins! 🪙`;
+
+
+    saveGame();
+
+}, 30000);
+
+
+/* =========================
+   COLLECT COINS
+========================= */
 
 earnCoinsButton.addEventListener(
     "click",
@@ -469,30 +528,488 @@ earnCoinsButton.addEventListener(
         }
 
 
-        /* Calculate coins */
+        if (pendingCoins <= 0) {
 
-        const earnedCoins =
-            Math.max(
-                5,
-                Math.floor(happiness / 10)
-            );
+            catMessage.textContent =
+                "Your cat hasn't earned any coins yet! 🐱";
 
-
-        /* Add coins */
-
-        coins += earnedCoins;
+            return;
+        }
 
 
-        /* Update display */
+        coins += pendingCoins;
+
+
+        catMessage.textContent =
+            `${currentCat} gave you ${pendingCoins} coins! 🪙`;
+
+
+        pendingCoins = 0;
+
 
         coinsDisplay.textContent =
             coins;
 
+        pendingCoinsDisplay.textContent =
+            "+0 🪙";
 
-        /* Message */
 
-        catMessage.textContent =
-            `${currentCat} earned 🪙 ${earnedCoins} coins!`;
-
+        saveGame();
     }
 );
+
+
+/* =========================
+   UPDATE LEVEL
+========================= */
+
+function updateLevel() {
+
+    let newLevel = 1;
+
+
+    if (happiness >= 120) {
+
+        newLevel = 4;
+
+    } else if (happiness >= 70) {
+
+        newLevel = 3;
+
+    } else if (happiness >= 30) {
+
+        newLevel = 2;
+    }
+
+
+    if (newLevel > level) {
+
+        alert(
+            `🎉 Level ${newLevel} unlocked!`
+        );
+    }
+
+
+    level = newLevel;
+
+
+    levelDisplay.textContent =
+        level;
+
+
+    updateFurnitureLocks();
+}
+
+
+/* =========================
+   UPDATE FURNITURE LOCKS
+========================= */
+
+function updateFurnitureLocks() {
+
+    furnitureItems.forEach(item => {
+
+        const requiredLevel =
+            Number(item.dataset.level);
+
+
+        const requiredHappiness =
+            (requiredLevel - 1) * 30;
+
+
+        if (happiness < requiredHappiness) {
+
+            item.classList.add("locked");
+
+            item.setAttribute(
+                "draggable",
+                "false"
+            );
+
+
+            if (
+                !item.querySelector(".lock-text")
+            ) {
+
+                const lockText =
+                    document.createElement("span");
+
+                lockText.classList.add(
+                    "lock-text"
+                );
+
+                lockText.textContent =
+                    `🔒 Happiness ${requiredHappiness}`;
+
+                item.appendChild(
+                    lockText
+                );
+            }
+
+        } else {
+
+            item.classList.remove(
+                "locked"
+            );
+
+            item.setAttribute(
+                "draggable",
+                "true"
+            );
+
+
+            const lockText =
+                item.querySelector(
+                    ".lock-text"
+                );
+
+            if (lockText) {
+                lockText.remove();
+            }
+        }
+    });
+}
+
+
+/* =========================
+   SAVE GAME
+========================= */
+
+function saveGame() {
+
+    const furniture = [];
+
+
+    document
+        .querySelectorAll(".placed-furniture")
+        .forEach(item => {
+
+            furniture.push({
+
+                id:
+                    item.dataset.id,
+
+                price:
+                    Number(
+                        item.dataset.price
+                    ),
+
+                happiness:
+                    Number(
+                        item.dataset.happiness
+                    ),
+
+                icon:
+                    item.textContent,
+
+                left:
+                    item.style.left,
+
+                top:
+                    item.style.top
+            });
+        });
+
+
+    const gameData = {
+
+        coins:
+            coins,
+
+        happiness:
+            happiness,
+
+        level:
+            level,
+
+        currentCat:
+            currentCat,
+
+        pendingCoins:
+            pendingCoins,
+
+        furniture:
+            furniture
+    };
+
+
+    localStorage.setItem(
+        "catHouseGame",
+        JSON.stringify(gameData)
+    );
+}
+
+
+/* =========================
+   LOAD GAME
+========================= */
+
+function loadGame() {
+
+    const savedGame =
+        localStorage.getItem(
+            "catHouseGame"
+        );
+
+
+    if (!savedGame) {
+
+        updateLevel();
+
+        return;
+    }
+
+
+    const gameData =
+        JSON.parse(savedGame);
+
+
+    coins =
+        gameData.coins ?? 500;
+
+    happiness =
+        gameData.happiness ?? 0;
+
+    level =
+        gameData.level ?? 1;
+
+    currentCat =
+        gameData.currentCat ?? null;
+
+    pendingCoins =
+        gameData.pendingCoins ?? 0;
+
+
+    /* Update UI */
+
+    coinsDisplay.textContent =
+        coins;
+
+    happinessDisplay.textContent =
+        happiness;
+
+    levelDisplay.textContent =
+        level;
+
+    pendingCoinsDisplay.textContent =
+        `+${pendingCoins} 🪙`;
+
+
+    /* =========================
+       RESTORE CAT
+    ========================= */
+
+    if (currentCat) {
+
+        const selectedCat =
+            document.querySelector(
+                `.cat-option[data-cat="${currentCat}"]`
+            );
+
+
+        if (selectedCat) {
+
+            catOptions.forEach(item => {
+
+                item.classList.remove(
+                    "selected"
+                );
+            });
+
+
+            selectedCat.classList.add(
+                "selected"
+            );
+
+
+            cat.textContent =
+                selectedCat.dataset.icon;
+
+
+            const personality =
+                selectedCat.dataset.personality;
+
+
+            const favorite =
+                cats[currentCat].favorite;
+
+
+            catMessage.textContent =
+                `${currentCat} is ${personality}! Favorite: ${favorite} ❤️`;
+        }
+    }
+
+
+    /* Update furniture locks */
+
+    updateFurnitureLocks();
+
+
+    /* =========================
+       RESTORE FURNITURE
+    ========================= */
+
+    gameData.furniture?.forEach(
+        savedFurniture => {
+
+            createPlacedFurniture(
+                savedFurniture
+            );
+        }
+    );
+}
+
+
+/* =========================
+   CREATE SAVED FURNITURE
+========================= */
+
+function createPlacedFurniture(
+    savedFurniture
+) {
+
+    const furniture =
+        document.createElement("div");
+
+
+    furniture.classList.add(
+        "placed-furniture"
+    );
+
+
+    furniture.textContent =
+        savedFurniture.icon;
+
+
+    furniture.dataset.id =
+        savedFurniture.id;
+
+
+    furniture.dataset.price =
+        savedFurniture.price;
+
+
+    furniture.dataset.happiness =
+        savedFurniture.happiness;
+
+
+    furniture.style.left =
+        savedFurniture.left;
+
+
+    furniture.style.top =
+        savedFurniture.top;
+
+
+    room.appendChild(
+        furniture
+    );
+
+
+    furniture.draggable = true;
+
+
+    /* =========================
+       MOVE SAVED FURNITURE
+    ========================= */
+
+    furniture.addEventListener(
+        "dragstart",
+        event => {
+
+            event.dataTransfer.setData(
+                "type",
+                "move"
+            );
+
+            event.dataTransfer.setData(
+                "id",
+                furniture.dataset.id
+            );
+        }
+    );
+
+
+    /* =========================
+       DELETE SAVED FURNITURE
+    ========================= */
+
+    furniture.addEventListener(
+        "dblclick",
+        () => {
+
+            const refund =
+                Math.floor(
+                    Number(
+                        furniture.dataset.price
+                    ) / 2
+                );
+
+
+            const happinessValue =
+                Number(
+                    furniture.dataset.happiness
+                );
+
+
+            coins += refund;
+
+            happiness -= happinessValue;
+
+
+            /* Remove FIRST */
+
+            furniture.remove();
+
+
+            /* Update UI */
+
+            coinsDisplay.textContent =
+                coins;
+
+            happinessDisplay.textContent =
+                happiness;
+
+
+            updateLevel();
+
+            saveGame();
+        }
+    );
+}
+
+
+/* =========================
+   RESTART GAME
+========================= */
+
+restartGameButton.addEventListener(
+    "click",
+    () => {
+
+        const confirmRestart =
+            confirm(
+                "Are you sure you want to restart the game? All progress will be lost."
+            );
+
+
+        if (!confirmRestart) {
+            return;
+        }
+
+
+        localStorage.removeItem(
+            "catHouseGame"
+        );
+
+
+        location.reload();
+    }
+);
+
+
+/* =========================
+   START GAME
+========================= */
+
+loadGame();
