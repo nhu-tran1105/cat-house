@@ -446,3 +446,53 @@ function moveFurniture(
         `${y}px`;
 
 }
+
+/* =========================
+   EARN COINS
+========================= */
+
+const earnCoinsButton =
+    document.getElementById("earn-coins");
+
+
+earnCoinsButton.addEventListener(
+    "click",
+    () => {
+
+        if (!currentCat) {
+
+            alert(
+                "Choose a cat first! 🐱"
+            );
+
+            return;
+        }
+
+
+        /* Calculate coins */
+
+        const earnedCoins =
+            Math.max(
+                5,
+                Math.floor(happiness / 10)
+            );
+
+
+        /* Add coins */
+
+        coins += earnedCoins;
+
+
+        /* Update display */
+
+        coinsDisplay.textContent =
+            coins;
+
+
+        /* Message */
+
+        catMessage.textContent =
+            `${currentCat} earned 🪙 ${earnedCoins} coins!`;
+
+    }
+);

@@ -295,3 +295,32 @@ body {
     margin-top: 5px;
     color: #765c4d;
 }
+
+/* =========================
+   EARN COINS BUTTON
+========================= */
+
+#earn-coins {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+
+    background: #f3cdb7;
+    color: #4b3b32;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#earn-coins:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#earn-coins:active {
+    transform: scale(0.96);
+}
