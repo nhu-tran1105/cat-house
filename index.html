@@ -12,124 +12,135 @@
 
 <body>
 
-    <!-- Header -->
+    <!-- =========================
+         HEADER
+    ========================= -->
 
     <header class="game-header">
 
-        <h1> Cat House </h1>
+        <h1>🐱 Cat House</h1>
 
         <div class="stats">
 
-        <div>
-            🪙 Coins:
-            <span id="coins">500</span>
-        </div>
+            <div>
+                🪙 Coins:
+                <span id="coins">500</span>
+            </div>
 
-        <div>
-            ❤️ Happiness:
-            <span id="happiness">0</span>
-        </div>
+            <div>
+                ❤️ Happiness:
+                <span id="happiness">0</span>
+            </div>
 
-        <div>
-            ⭐ Level:
-            <span id="level">1</span>
-        </div>
+            <div>
+                ⭐ Level:
+                <span id="level">1</span>
+            </div>
 
-        <div class="coin-reward">
+            <div class="coin-reward">
 
-            <button id="earn-coins">
-                💰 Collect Coins
-            </button>
+                <button id="earn-coins">
+                    💰 Collect Coins
+                </button>
 
-            <button id="restart-game">
-                🔄 Restart Game
-            </button>
+                <button id="restart-game">
+                    🔄 Restart Game
+                </button>
 
-            <span id="pending-coins">
-                +0 🪙
-            </span>
+                <span id="pending-coins">
+                    +0 🪙
+                </span>
 
-        </div>
-
-    </div>
-    </header>
-
-
-    <!-- Main Game -->
-
-    <main class="game-container">
-
-
-    <!-- Cat Room -->
-
-    <section class="room-container">
-
-        <h2>My Cat's Room</h2>
-
-        <div id="room" class="room">
-
-            <div id="cat" class="cat">
-                🐱
             </div>
 
         </div>
 
-    </section>
+    </header>
 
 
-    <!-- Cat Selection -->
+    <!-- =========================
+         MAIN GAME
+    ========================= -->
 
-    <section class="cat-selection">
-
-        <h2>🐾 Choose Your Cat</h2>
-
-        <div class="cat-list">
-
-            <button
-                class="cat-option"
-                data-cat="Lem"
-                data-icon="🐈"
-                data-personality="Calm"
-            >
-                <span>🐈</span>
-                <strong>Lem</strong>
-                <small>Calm</small>
-            </button>
+    <main class="game-container">
 
 
-            <button
-                class="cat-option"
-                data-cat="Den"
-                data-icon="🐈‍⬛"
-                data-personality="Playful"
-            >
-                <span>🐈‍⬛</span>
-                <strong>Den</strong>
-                <small>Playful</small>
-            </button>
+        <!-- =========================
+             CAT ROOM
+        ========================= -->
+
+        <section class="room-container">
+
+            <h2>My Cat's Room</h2>
+
+            <div id="room" class="room">
+
+                <div id="cat" class="cat">
+                    🐱
+                </div>
+
+            </div>
+
+        </section>
 
 
-            <button
-                class="cat-option"
-                data-cat="Cheese"
-                data-icon="🐅"
-                data-personality="Friendly"
-            >
-                <span>🐅</span>
-                <strong>Cheese</strong>
-                <small>Friendly</small>
-            </button>
+        <!-- =========================
+             CAT SELECTION
+        ========================= -->
 
-        </div>
+        <section class="cat-selection">
 
-        <p id="cat-message">
-            Choose a cat to start designing their house!
-        </p>
+            <h2>🐾 Choose Your Cat</h2>
 
-    </section>
+            <div class="cat-list">
+
+                <button
+                    class="cat-option"
+                    data-cat="Lem"
+                    data-icon="🐈"
+                    data-personality="Calm"
+                >
+                    <span>🐈</span>
+                    <strong>Lem</strong>
+                    <small>Calm</small>
+                </button>
 
 
-        <!-- Furniture Shop -->
+                <button
+                    class="cat-option"
+                    data-cat="Den"
+                    data-icon="🐈‍⬛"
+                    data-personality="Playful"
+                >
+                    <span>🐈‍⬛</span>
+                    <strong>Den</strong>
+                    <small>Playful</small>
+                </button>
+
+
+                <button
+                    class="cat-option"
+                    data-cat="Cheese"
+                    data-icon="🐅"
+                    data-personality="Friendly"
+                >
+                    <span>🐅</span>
+                    <strong>Cheese</strong>
+                    <small>Friendly</small>
+                </button>
+
+            </div>
+
+            <p id="cat-message">
+                Choose a cat to start designing their house!
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             FURNITURE SHOP
+        ========================= -->
 
         <section class="shop">
 
@@ -137,101 +148,202 @@
 
             <div class="furniture-list">
 
-                <!-- Bed -->
+
+                <!-- BED -->
+
                 <div
                     class="furniture-item"
-                    draggable="true"
                     data-name="Bed"
                     data-price="100"
                     data-happiness="10"
                     data-level="1"
+                    data-icon="🛏️"
                 >
+
                     <div class="furniture-icon">
                         🛏️
                     </div>
 
                     <strong>Bed</strong>
+
                     <p>🪙 100</p>
+
                     <p>❤️ +10</p>
+
+                    <button class="buy-button">
+                        Buy
+                    </button>
+
                 </div>
 
 
-                <!-- Cat Tree -->
+                <!-- CAT TREE -->
+
                 <div
                     class="furniture-item"
-                    draggable="true"
                     data-name="Cat Tree"
                     data-price="150"
                     data-happiness="15"
                     data-level="2"
+                    data-icon="🌳"
                 >
+
                     <div class="furniture-icon">
                         🌳
                     </div>
 
                     <strong>Cat Tree</strong>
+
                     <p>🪙 150</p>
+
                     <p>❤️ +15</p>
+
+                    <button class="buy-button">
+                        Buy
+                    </button>
+
                 </div>
 
 
-                <!-- Toy -->
+                <!-- TOY -->
+
                 <div
                     class="furniture-item"
-                    draggable="true"
                     data-name="Toy"
                     data-price="50"
                     data-happiness="5"
                     data-level="1"
+                    data-icon="🧶"
                 >
+
                     <div class="furniture-icon">
                         🧶
                     </div>
 
                     <strong>Toy</strong>
+
                     <p>🪙 50</p>
+
                     <p>❤️ +5</p>
+
+                    <button class="buy-button">
+                        Buy
+                    </button>
+
                 </div>
 
 
-                <!-- Food Bowl -->
+                <!-- FOOD BOWL -->
+
                 <div
                     class="furniture-item"
-                    draggable="true"
                     data-name="Food Bowl"
                     data-price="80"
                     data-happiness="8"
                     data-level="1"
+                    data-icon="🍽️"
                 >
+
                     <div class="furniture-icon">
                         🍽️
                     </div>
 
                     <strong>Food Bowl</strong>
+
                     <p>🪙 80</p>
+
                     <p>❤️ +8</p>
+
+                    <button class="buy-button">
+                        Buy
+                    </button>
+
                 </div>
 
 
-                <!-- Window -->
+                <!-- WINDOW -->
+
                 <div
                     class="furniture-item"
-                    draggable="true"
                     data-name="Window"
                     data-price="120"
                     data-happiness="12"
                     data-level="2"
+                    data-icon="🪟"
                 >
+
                     <div class="furniture-icon">
                         🪟
                     </div>
 
                     <strong>Window</strong>
+
                     <p>🪙 120</p>
+
                     <p>❤️ +12</p>
+
+                    <button class="buy-button">
+                        Buy
+                    </button>
+
                 </div>
 
             </div>
+
+        </section>
+
+
+        <!-- =========================
+             INVENTORY
+        ========================= -->
+
+        <section class="inventory">
+
+            <h2>🎒 My Inventory</h2>
+
+            <p class="inventory-help">
+                Drag your furniture into the room.
+            </p>
+
+            <div
+                id="inventory-list"
+                class="inventory-list"
+            >
+
+                <p id="empty-inventory">
+                    Your inventory is empty.
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="rooms">
+            <h2>🏠 Rooms</h2>
+
+            <div class="room-list">
+                <button class="room-btn active" data-room="living-room">
+                    🛋️ Living Room
+                </button>
+
+                <button class="room-btn" data-room="bedroom">
+                    🛏️ Bedroom
+                </button>
+
+                <button class="room-btn" data-room="garden">
+                    🌳 Garden
+                </button>
+            </div>
+        </section>
+
+        <section class="missions">
+
+            <h2>🎯 Missions</h2>
+
+            <div
+                id="mission-list"
+                class="mission-list"
+            ></div>
 
         </section>
 

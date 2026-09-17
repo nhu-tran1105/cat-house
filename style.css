@@ -57,7 +57,7 @@ body {
 
 
 /* =========================
-   COLLECT COINS BUTTON
+   COLLECT COINS
 ========================= */
 
 #earn-coins {
@@ -79,16 +79,58 @@ body {
 
 #earn-coins:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 #earn-coins:active {
     transform: scale(0.96);
 }
 
+
+/* =========================
+   PENDING COINS
+========================= */
+
 #pending-coins {
     font-weight: bold;
     color: #a86f45;
+}
+
+
+/* =========================
+   RESTART
+========================= */
+
+#restart-game {
+    padding: 10px 16px;
+
+    border: 2px solid #d6b5a0;
+    border-radius: 10px;
+
+    background: #fff4ed;
+    color: #6b4b3e;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#restart-game:hover {
+    background: #f3cdb7;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+#restart-game:active {
+    transform: scale(0.96);
 }
 
 
@@ -98,7 +140,9 @@ body {
 
 .game-container {
     max-width: 1100px;
+
     margin: 30px auto;
+
     padding: 20px;
 }
 
@@ -150,6 +194,7 @@ body {
 
 .shop {
     margin-top: 30px;
+
     padding: 20px;
 
     background: white;
@@ -159,16 +204,9 @@ body {
     width: 100%;
 }
 
-.shop .furniture-list {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(5, 150px);
-    justify-content: center;
-    gap: 15px;
-}
-
 .shop h2 {
     margin-top: 0;
+
     text-align: center;
 }
 
@@ -179,10 +217,15 @@ body {
 
 .furniture-list {
     display: grid;
-    grid-template-columns: repeat(5, 150px);
+
+    grid-template-columns:
+        repeat(5, 150px);
+
     justify-content: center;
+
     gap: 15px;
 }
+
 
 /* =========================
    FURNITURE CARD
@@ -200,19 +243,14 @@ body {
 
     text-align: center;
 
-    cursor: grab;
-
     transition: 0.2s;
 }
 
 .furniture-item:hover {
     transform: translateY(-5px);
 
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
-}
-
-.furniture-item:active {
-    cursor: grabbing;
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -222,12 +260,51 @@ body {
 
 .furniture-icon {
     font-size: 45px;
+
     margin-bottom: 5px;
 }
 
 .furniture-item p {
     margin: 5px 0 0;
+
     font-size: 14px;
+}
+
+
+/* =========================
+   BUY BUTTON
+========================= */
+
+.buy-button {
+    margin-top: 10px;
+
+    width: 100%;
+
+    padding: 8px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #c58b6d;
+    color: white;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.buy-button:hover {
+    background: #a86f45;
+
+    transform: translateY(-2px);
+}
+
+.buy-button:active {
+    transform: scale(0.96);
 }
 
 
@@ -238,8 +315,6 @@ body {
 .furniture-item.locked {
     opacity: 0.45;
 
-    cursor: not-allowed;
-
     filter: grayscale(1);
 }
 
@@ -249,13 +324,139 @@ body {
     box-shadow: none;
 }
 
+.furniture-item.locked .buy-button {
+    cursor: not-allowed;
+
+    background: #aaa;
+}
+
 .lock-text {
     display: block;
 
     margin-top: 8px;
 
     font-size: 12px;
+
     font-weight: bold;
+}
+
+
+/* =========================
+   INVENTORY
+========================= */
+
+.inventory {
+    margin-top: 30px;
+
+    padding: 20px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    width: 100%;
+}
+
+.inventory h2 {
+    margin-top: 0;
+
+    text-align: center;
+}
+
+.inventory-help {
+    text-align: center;
+
+    color: #765c4d;
+
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   INVENTORY LIST
+========================= */
+
+.inventory-list {
+    min-height: 130px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   INVENTORY ITEM
+========================= */
+
+.inventory-item {
+    width: 140px;
+
+    padding: 15px;
+
+    background: #f8dfcf;
+
+    border: 2px solid #ead8c8;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    cursor: grab;
+
+    user-select: none;
+
+    transition: 0.2s;
+}
+
+.inventory-item:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.15);
+}
+
+.inventory-item:active {
+    cursor: grabbing;
+}
+
+.inventory-icon {
+    font-size: 45px;
+
+    margin-bottom: 5px;
+}
+
+.inventory-name {
+    font-weight: bold;
+
+    display: block;
+
+    margin-bottom: 5px;
+}
+
+.inventory-count {
+    font-size: 14px;
+
+    color: #765c4d;
+}
+
+
+/* =========================
+   EMPTY INVENTORY
+========================= */
+
+#empty-inventory {
+    color: #8c776b;
+
+    font-style: italic;
+
+    text-align: center;
 }
 
 
@@ -283,7 +484,7 @@ body {
 
 
 /* =========================
-   ROOM DRAG HIGHLIGHT
+   ROOM DRAG
 ========================= */
 
 .room.drag-over {
@@ -309,7 +510,8 @@ body {
 
     text-align: center;
 
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
 .cat-selection h2 {
@@ -355,20 +557,15 @@ body {
 .cat-option:hover {
     transform: translateY(-5px);
 
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.15);
 }
-
-
-/* Selected cat */
 
 .cat-option.selected {
     border: 3px solid #c58b6d;
 
     background: #f3cdb7;
 }
-
-
-/* Cat icon */
 
 .cat-option span {
     display: block;
@@ -378,17 +575,11 @@ body {
     margin-bottom: 8px;
 }
 
-
-/* Cat name */
-
 .cat-option strong {
     display: block;
 
     font-size: 18px;
 }
-
-
-/* Cat personality */
 
 .cat-option small {
     display: block;
@@ -400,7 +591,7 @@ body {
 
 
 /* =========================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ========================= */
 
 @media (max-width: 900px) {
@@ -417,6 +608,11 @@ body {
         justify-content: center;
 
         flex-wrap: wrap;
+    }
+
+    .furniture-list {
+        grid-template-columns:
+            repeat(3, 150px);
     }
 }
 
@@ -445,44 +641,191 @@ body {
         height: 400px;
     }
 
+    .furniture-list {
+        grid-template-columns:
+            repeat(2, 130px);
+    }
+
     .furniture-item {
         width: 130px;
+        min-width: 130px;
     }
 
     .cat-option {
         width: 130px;
     }
+
+    .inventory-item {
+        width: 130px;
+    }
 }
 
 /* =========================
-   RESTART GAME BUTTON
+   MISSIONS
 ========================= */
 
-#restart-game {
-    padding: 10px 16px;
+.missions {
+    margin-top: 30px;
 
-    border: 2px solid #d6b5a0;
-    border-radius: 10px;
+    padding: 20px;
 
-    background: #fff4ed;
-    color: #6b4b3e;
+    background: white;
 
-    font-size: 15px;
-    font-weight: bold;
+    border-radius: 15px;
 
-    cursor: pointer;
+    width: 100%;
+}
+
+.missions h2 {
+    margin-top: 0;
+
+    text-align: center;
+}
+
+
+/* =========================
+   MISSION LIST
+========================= */
+
+.mission-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 15px;
+}
+
+
+/* =========================
+   MISSION CARD
+========================= */
+
+.mission-card {
+    padding: 15px;
+
+    background: #f8dfcf;
+
+    border: 2px solid #ead8c8;
+
+    border-radius: 12px;
+
+    text-align: center;
 
     transition: 0.2s;
 }
 
-#restart-game:hover {
-    background: #f3cdb7;
+.mission-card:hover {
+    transform: translateY(-3px);
 
-    transform: translateY(-2px);
-
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.12);
 }
 
-#restart-game:active {
-    transform: scale(0.96);
+.mission-icon {
+    font-size: 35px;
+
+    margin-bottom: 8px;
+}
+
+.mission-name {
+    display: block;
+
+    font-weight: bold;
+
+    font-size: 16px;
+
+    margin-bottom: 6px;
+}
+
+.mission-description {
+    font-size: 13px;
+
+    min-height: 35px;
+
+    margin-bottom: 8px;
+}
+
+.mission-progress {
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.mission-reward {
+    margin-top: 8px;
+
+    font-size: 14px;
+
+    color: #a86f45;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   COMPLETED MISSION
+========================= */
+
+.mission-card.completed {
+    background: #e8f3e2;
+
+    border-color: #9abd8b;
+}
+
+.mission-card.completed .mission-progress {
+    color: #5b8a4b;
+}
+
+
+/* =========================
+   MISSION RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .mission-list {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .mission-list {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+.rooms {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.room-list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.room-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background: #eee;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.room-btn:hover {
+    transform: translateY(-2px);
+}
+
+.room-btn.active {
+    background: #ffd166;
+    font-weight: bold;
 }
