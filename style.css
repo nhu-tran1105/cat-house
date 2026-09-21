@@ -9,7 +9,6 @@ body {
     color: #4b3b32;
 }
 
-
 /* =========================
    HEADER
 ========================= */
@@ -17,11 +16,9 @@ body {
 .game-header {
     background: white;
     padding: 20px 30px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     border-bottom: 2px solid #ead8c8;
     gap: 30px;
 }
@@ -32,7 +29,6 @@ body {
     white-space: nowrap;
 }
 
-
 /* =========================
    HEADER STATS
 ========================= */
@@ -41,9 +37,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-
     gap: 20px;
-
     font-size: 18px;
     white-space: nowrap;
 }
@@ -55,39 +49,30 @@ body {
     white-space: nowrap;
 }
 
-
 /* =========================
    COLLECT COINS
 ========================= */
 
 #earn-coins {
     padding: 10px 16px;
-
     border: none;
     border-radius: 10px;
-
     background: #f3cdb7;
     color: #4b3b32;
-
     font-size: 15px;
     font-weight: bold;
-
     cursor: pointer;
-
     transition: 0.2s;
 }
 
 #earn-coins:hover {
     transform: translateY(-2px);
-
-    box-shadow:
-        0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 #earn-coins:active {
     transform: scale(0.96);
 }
-
 
 /* =========================
    PENDING COINS
@@ -98,41 +83,31 @@ body {
     color: #a86f45;
 }
 
-
 /* =========================
    RESTART
 ========================= */
 
 #restart-game {
     padding: 10px 16px;
-
     border: 2px solid #d6b5a0;
     border-radius: 10px;
-
     background: #fff4ed;
     color: #6b4b3e;
-
     font-size: 15px;
     font-weight: bold;
-
     cursor: pointer;
-
     transition: 0.2s;
 }
 
 #restart-game:hover {
     background: #f3cdb7;
-
     transform: translateY(-2px);
-
-    box-shadow:
-        0 4px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
 #restart-game:active {
     transform: scale(0.96);
 }
-
 
 /* =========================
    GAME CONTAINER
@@ -140,12 +115,44 @@ body {
 
 .game-container {
     max-width: 1100px;
-
     margin: 30px auto;
-
     padding: 20px;
 }
 
+/* =========================
+   ROOMS
+========================= */
+
+.rooms {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.room-list {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.room-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background: #eee;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.room-btn:hover {
+    transform: translateY(-2px);
+}
+
+.room-btn.active {
+    background: #ffd166;
+    font-weight: bold;
+}
 
 /* =========================
    ROOM
@@ -157,7 +164,6 @@ body {
 
 .room {
     position: relative;
-
     width: 100%;
     height: 500px;
 
@@ -169,6 +175,70 @@ body {
     overflow: hidden;
 }
 
+/* =========================
+   ROOM BACKGROUNDS
+========================= */
+
+.room.living-room {
+    background:
+        linear-gradient(
+            rgba(255, 245, 235, 0.35),
+            rgba(255, 245, 235, 0.35)
+        ),
+        #ead8c0;
+}
+
+.room.bedroom {
+    background:
+        linear-gradient(
+            rgba(235, 225, 245, 0.35),
+            rgba(235, 225, 245, 0.35)
+        ),
+        #d8c8df;
+}
+
+.room.garden {
+    background:
+        linear-gradient(
+            rgba(210, 240, 210, 0.35),
+            rgba(210, 240, 210, 0.35)
+        ),
+        #b9d9a8;
+}
+
+/* =========================
+   ROOM DECORATIONS
+========================= */
+
+.room.living-room::before {
+    content: "🛋️  🪴  🖼️";
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 28px;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.room.bedroom::before {
+    content: "🛏️  🌙  💤";
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 28px;
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.room.garden::before {
+    content: "🌳  🌷  🌿  🦋";
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 28px;
+    opacity: 0.8;
+    pointer-events: none;
+}
 
 /* =========================
    CAT
@@ -185,8 +255,9 @@ body {
     font-size: 80px;
 
     user-select: none;
-}
 
+    z-index: 10;
+}
 
 /* =========================
    SHOP
@@ -194,22 +265,16 @@ body {
 
 .shop {
     margin-top: 30px;
-
     padding: 20px;
-
     background: white;
-
     border-radius: 15px;
-
     width: 100%;
 }
 
 .shop h2 {
     margin-top: 0;
-
     text-align: center;
 }
-
 
 /* =========================
    FURNITURE LIST
@@ -217,15 +282,10 @@ body {
 
 .furniture-list {
     display: grid;
-
-    grid-template-columns:
-        repeat(5, 150px);
-
+    grid-template-columns: repeat(5, 150px);
     justify-content: center;
-
     gap: 15px;
 }
-
 
 /* =========================
    FURNITURE CARD
@@ -248,11 +308,8 @@ body {
 
 .furniture-item:hover {
     transform: translateY(-5px);
-
-    box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
-
 
 /* =========================
    FURNITURE ICON
@@ -260,16 +317,13 @@ body {
 
 .furniture-icon {
     font-size: 45px;
-
     margin-bottom: 5px;
 }
 
 .furniture-item p {
     margin: 5px 0 0;
-
     font-size: 14px;
 }
-
 
 /* =========================
    BUY BUTTON
@@ -283,7 +337,6 @@ body {
     padding: 8px;
 
     border: none;
-
     border-radius: 8px;
 
     background: #c58b6d;
@@ -299,7 +352,6 @@ body {
 
 .buy-button:hover {
     background: #a86f45;
-
     transform: translateY(-2px);
 }
 
@@ -307,39 +359,32 @@ body {
     transform: scale(0.96);
 }
 
-
 /* =========================
    LOCKED FURNITURE
 ========================= */
 
 .furniture-item.locked {
     opacity: 0.45;
-
     filter: grayscale(1);
 }
 
 .furniture-item.locked:hover {
     transform: none;
-
     box-shadow: none;
 }
 
 .furniture-item.locked .buy-button {
     cursor: not-allowed;
-
     background: #aaa;
 }
 
-.lock-text {
+.furniture-item.locked::after {
+    content: attr(data-lock);
     display: block;
-
     margin-top: 8px;
-
     font-size: 12px;
-
     font-weight: bold;
 }
-
 
 /* =========================
    INVENTORY
@@ -347,49 +392,33 @@ body {
 
 .inventory {
     margin-top: 30px;
-
     padding: 20px;
-
     background: white;
-
     border-radius: 15px;
-
     width: 100%;
 }
 
 .inventory h2 {
     margin-top: 0;
-
     text-align: center;
 }
 
 .inventory-help {
     text-align: center;
-
     color: #765c4d;
-
     margin-bottom: 20px;
 }
-
-
-/* =========================
-   INVENTORY LIST
-========================= */
 
 .inventory-list {
     min-height: 130px;
 
     display: flex;
-
     justify-content: center;
-
     align-items: center;
 
     gap: 15px;
-
     flex-wrap: wrap;
 }
-
 
 /* =========================
    INVENTORY ITEM
@@ -403,7 +432,6 @@ body {
     background: #f8dfcf;
 
     border: 2px solid #ead8c8;
-
     border-radius: 12px;
 
     text-align: center;
@@ -417,9 +445,7 @@ body {
 
 .inventory-item:hover {
     transform: translateY(-5px);
-
-    box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
 .inventory-item:active {
@@ -428,37 +454,14 @@ body {
 
 .inventory-icon {
     font-size: 45px;
-
     margin-bottom: 5px;
 }
-
-.inventory-name {
-    font-weight: bold;
-
-    display: block;
-
-    margin-bottom: 5px;
-}
-
-.inventory-count {
-    font-size: 14px;
-
-    color: #765c4d;
-}
-
-
-/* =========================
-   EMPTY INVENTORY
-========================= */
 
 #empty-inventory {
     color: #8c776b;
-
     font-style: italic;
-
     text-align: center;
 }
-
 
 /* =========================
    PLACED FURNITURE
@@ -478,10 +481,8 @@ body {
 
 .placed-furniture:hover {
     transform: scale(1.1);
-
     filter: brightness(1.1);
 }
-
 
 /* =========================
    ROOM DRAG
@@ -489,10 +490,8 @@ body {
 
 .room.drag-over {
     outline: 5px dashed #c58b6d;
-
     outline-offset: -10px;
 }
-
 
 /* =========================
    CAT SELECTION
@@ -510,33 +509,19 @@ body {
 
     text-align: center;
 
-    box-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
 }
 
 .cat-selection h2 {
     margin-top: 0;
 }
 
-
-/* =========================
-   CAT LIST
-========================= */
-
 .cat-list {
     display: flex;
-
     justify-content: center;
-
     gap: 20px;
-
     flex-wrap: wrap;
 }
-
-
-/* =========================
-   CAT OPTION
-========================= */
 
 .cat-option {
     width: 150px;
@@ -544,7 +529,6 @@ body {
     padding: 15px;
 
     border: 2px solid #ead8c8;
-
     border-radius: 15px;
 
     background: #f8dfcf;
@@ -556,39 +540,117 @@ body {
 
 .cat-option:hover {
     transform: translateY(-5px);
-
-    box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cat-option.selected {
     border: 3px solid #c58b6d;
-
     background: #f3cdb7;
 }
 
 .cat-option span {
     display: block;
-
     font-size: 55px;
-
     margin-bottom: 8px;
 }
 
 .cat-option strong {
     display: block;
-
     font-size: 18px;
 }
 
 .cat-option small {
     display: block;
-
     margin-top: 5px;
-
     color: #765c4d;
 }
 
+/* =========================
+   MISSIONS
+========================= */
+
+.missions {
+    margin-top: 30px;
+
+    padding: 20px;
+
+    background: white;
+
+    border-radius: 15px;
+
+    width: 100%;
+}
+
+.missions h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.mission-list {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 15px;
+}
+
+/* IMPORTANT:
+   script.js creates .mission
+*/
+
+.mission {
+    padding: 15px;
+
+    background: #f8dfcf;
+
+    border: 2px solid #ead8c8;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    transition: 0.2s;
+}
+
+.mission:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+.mission.completed {
+    background: #e8f3e2;
+    border-color: #9abd8b;
+}
+
+.mission-icon {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.mission-info strong {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.mission-info p {
+    font-size: 13px;
+    min-height: 35px;
+    margin: 0 0 8px;
+}
+
+.mission-progress {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.mission-reward {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #a86f45;
+    font-weight: bold;
+}
 
 /* =========================
    RESPONSIVE
@@ -598,15 +660,12 @@ body {
 
     .game-header {
         flex-direction: column;
-
         align-items: center;
-
         gap: 15px;
     }
 
     .stats {
         justify-content: center;
-
         flex-wrap: wrap;
     }
 
@@ -614,8 +673,12 @@ body {
         grid-template-columns:
             repeat(3, 150px);
     }
-}
 
+    .mission-list {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+}
 
 @media (max-width: 600px) {
 
@@ -629,7 +692,6 @@ body {
 
     .stats {
         gap: 10px;
-
         font-size: 15px;
     }
 
@@ -658,174 +720,136 @@ body {
     .inventory-item {
         width: 130px;
     }
-}
-
-/* =========================
-   MISSIONS
-========================= */
-
-.missions {
-    margin-top: 30px;
-
-    padding: 20px;
-
-    background: white;
-
-    border-radius: 15px;
-
-    width: 100%;
-}
-
-.missions h2 {
-    margin-top: 0;
-
-    text-align: center;
-}
-
-
-/* =========================
-   MISSION LIST
-========================= */
-
-.mission-list {
-    display: grid;
-
-    grid-template-columns:
-        repeat(5, 1fr);
-
-    gap: 15px;
-}
-
-
-/* =========================
-   MISSION CARD
-========================= */
-
-.mission-card {
-    padding: 15px;
-
-    background: #f8dfcf;
-
-    border: 2px solid #ead8c8;
-
-    border-radius: 12px;
-
-    text-align: center;
-
-    transition: 0.2s;
-}
-
-.mission-card:hover {
-    transform: translateY(-3px);
-
-    box-shadow:
-        0 5px 12px rgba(0, 0, 0, 0.12);
-}
-
-.mission-icon {
-    font-size: 35px;
-
-    margin-bottom: 8px;
-}
-
-.mission-name {
-    display: block;
-
-    font-weight: bold;
-
-    font-size: 16px;
-
-    margin-bottom: 6px;
-}
-
-.mission-description {
-    font-size: 13px;
-
-    min-height: 35px;
-
-    margin-bottom: 8px;
-}
-
-.mission-progress {
-    font-size: 14px;
-
-    font-weight: bold;
-}
-
-.mission-reward {
-    margin-top: 8px;
-
-    font-size: 14px;
-
-    color: #a86f45;
-
-    font-weight: bold;
-}
-
-
-/* =========================
-   COMPLETED MISSION
-========================= */
-
-.mission-card.completed {
-    background: #e8f3e2;
-
-    border-color: #9abd8b;
-}
-
-.mission-card.completed .mission-progress {
-    color: #5b8a4b;
-}
-
-
-/* =========================
-   MISSION RESPONSIVE
-========================= */
-
-@media (max-width: 900px) {
-
-    .mission-list {
-        grid-template-columns:
-            repeat(3, 1fr);
-    }
-
-}
-
-@media (max-width: 600px) {
 
     .mission-list {
         grid-template-columns:
             repeat(2, 1fr);
     }
-
 }
 
-.rooms {
-    margin: 25px 0;
-    text-align: center;
-}
+/* =========================
+   CAT INTERACTION
+========================= */
 
-.room-list {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.room-btn {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 10px;
-    background: #eee;
+.cat {
+    transition: transform 0.3s ease;
     cursor: pointer;
-    font-size: 15px;
 }
 
-.room-btn:hover {
-    transform: translateY(-2px);
+.cat.happy {
+    animation: catHappy 0.6s ease;
 }
 
-.room-btn.active {
-    background: #ffd166;
+.cat.clicked {
+    animation: catBounce 0.5s ease;
+}
+
+@keyframes catHappy {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -60%) scale(1.15);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes catBounce {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(-50%, -50%) rotate(-8deg);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) rotate(8deg);
+    }
+
+    75% {
+        transform: translate(-50%, -50%) rotate(-5deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+}
+
+/* =========================
+   CAT MOVEMENT
+========================= */
+
+.cat.moving {
+    animation: catMove 1.2s ease-in-out;
+}
+
+@keyframes catMove {
+    0% {
+        transform: translate(-50%, -50%);
+    }
+
+    25% {
+        transform: translate(-30%, -50%);
+    }
+
+    50% {
+        transform: translate(20%, -50%);
+    }
+
+    75% {
+        transform: translate(40%, -50%);
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* =========================
+   CAT NEEDS
+========================= */
+
+.cat-needs {
+    text-align: center;
+    margin: 15px auto 25px;
+    max-width: 500px;
+}
+
+.need-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.need-label {
+    width: 120px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.need-progress {
+    flex: 1;
+    height: 16px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.need-fill {
+    display: block;
+    height: 100%;
+    background: #8bc34a;
+    transition: width 0.3s ease;
+}
+
+.need-bar > span:last-child {
+    width: 45px;
+    text-align: left;
     font-weight: bold;
 }

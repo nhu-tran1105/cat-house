@@ -197,6 +197,15 @@ roomButtons.forEach(button => {
         // Change room
         currentRoom = button.dataset.room;
 
+        // Change room background
+        room.classList.remove(
+            "living-room",
+            "bedroom",
+            "garden"
+        );
+
+        room.classList.add(currentRoom);
+
         // Update active button
         roomButtons.forEach(btn => {
             btn.classList.remove("active");
@@ -1168,7 +1177,9 @@ function saveGame() {
             currentRoom,
 
         roomFurniture:
-            roomFurniture
+            roomFurniture,
+
+        catNeeds: catNeeds,
     };
 
 
@@ -1237,6 +1248,13 @@ function loadGame() {
         completedMissions =
             gameData.completedMissions ?? [];
 
+                if (gameData.catNeeds) {
+            catNeeds = {
+                hunger: gameData.catNeeds.hunger ?? 100,
+                energy: gameData.catNeeds.energy ?? 100
+            };
+        }
+
 
         // ===============================
         // ROOM DATA
@@ -1284,7 +1302,13 @@ function loadGame() {
             gameData.currentRoom ??
             "living-room";
 
+        room.classList.remove(
+            "living-room",
+            "bedroom",
+            "garden"
+        );
 
+        room.classList.add(currentRoom);
         // ===============================
         // UPDATE UI
         // ===============================
@@ -1518,3 +1542,225 @@ updateCoinsDisplay();
 updateHappinessDisplay();
 
 updateFurnitureLocks();
+
+updateCatNeedsDisplay();
+
+// ===============================
+// CAT INTERACTION
+// ===============================
+
+const catMessages = {
+    Lem: [
+        "Lem is feeling cozy! 🥰",
+        "Lem wants to take a nap. 💤",
+        "Lem is purring! 😸",
+        "Lem looks happy! ❤️"
+    ],
+
+    Den: [
+        "Den wants to play! 🧶",
+        "Den is ready for fun! 😸",
+        "Den is running around! 🐾",
+        "Den is very playful today! ❤️"
+    ],
+
+    Cheese: [
+        "Cheese wants some attention! 🥰",
+        "Cheese is happy to see you! 😸",
+        "Cheese is purring! ❤️",
+        "Cheese loves this room! 🐾"
+    ]
+};
+
+
+if (catDisplay) {
+
+    catDisplay.addEventListener(
+        "click",
+        () => {
+
+            // No cat selected
+            if (!currentCat) {
+
+                catMessage.textContent =
+                    "Choose a cat first! 🐱";
+
+                return;
+            }
+
+
+            // Get messages
+            const messages =
+                catMessages[currentCat] || [
+                    "Meow! 🐱"
+                ];
+
+
+            // Random message
+            const randomMessage =
+                messages[
+                    Math.floor(
+                        Math.random() *
+                        messages.length
+                    )
+                ];
+
+
+            catMessage.textContent =
+                randomMessage;
+
+
+            // Animation
+            catDisplay.classList.remove(
+                "clicked"
+            );
+
+
+            // Force animation restart
+            void catDisplay.offsetWidth;
+
+
+            catDisplay.classList.add(
+                "clicked"
+            );
+        }
+    );
+}
+
+// ===============================
+// CAT MOVEMENT
+// ===============================
+
+if (catDisplay) {
+    catDisplay.addEventListener("dblclick", () => {
+        if (!currentCat) {
+            catMessage.textContent = "Choose a cat first! 🐱";
+            return;
+        }
+
+        catDisplay.classList.remove("moving");
+
+        // Restart animation
+        void catDisplay.offsetWidth;
+
+        catDisplay.classList.add("moving");
+
+        catMessage.textContent =
+            `${currentCat} is running around! 🐾`;
+
+        setTimeout(() => {
+            catDisplay.classList.remove("moving");
+        }, 1200);
+    });
+}
+
+// ===============================
+// CAT NEEDS
+// ===============================
+
+let catNeeds = {
+    hunger: 100,
+    energy: 100
+};
+
+function updateCatNeedsDisplay() {
+    const hungerBar = document.getElementById("hunger-bar");
+    const energyBar = document.getElementById("energy-bar");
+    const happinessBar = document.getElementById("happiness-bar");
+
+    const hungerValue =
+        document.getElementById("hunger-value");
+
+    const energyValue =
+        document.getElementById("energy-value");
+
+    const happinessValue =
+        document.getElementById("happiness-value");
+
+    const happinessPercent =
+        Math.min(100, Math.max(0, happiness));
+
+    if (hungerBar) {
+        hungerBar.style.width =
+            catNeeds.hunger + "%";
+    }
+
+    if (energyBar) {
+        energyBar.style.width =
+            catNeeds.energy + "%";
+    }
+
+    if (happinessBar) {
+        happinessBar.style.width =
+            happinessPercent + "%";
+    }
+
+    if (hungerValue) {
+        hungerValue.textContent =
+            catNeeds.hunger + "%";
+    }
+
+    if (energyValue) {
+        energyValue.textContent =
+            catNeeds.energy + "%";
+    }
+
+    if (happinessValue) {
+        happinessValue.textContent =
+            happinessPercent + "%";
+    }
+}
+
+setInterval(() => {
+    updateCatNeeds();
+}, 30000);
+
+
+// ===============================
+// FURNITURE INTERACTION
+// ===============================
+
+document.addEventListener("click", (event) => {
+    const furniture =
+        event.target.closest(".placed-furniture");
+
+    if (!furniture || !currentCat) return;
+
+    const furnitureName =
+        furniture.dataset.name;
+
+    if (furnitureName === "Food Bowl") {
+
+        catNeeds.hunger =
+            Math.min(100, catNeeds.hunger + 30);
+
+        catMessage.textContent =
+            `${currentCat} is eating! 🍽️😸`;
+
+        updateCatNeedsDisplay();
+
+    } else if (furnitureName === "Bed") {
+
+        catNeeds.energy =
+            Math.min(100, catNeeds.energy + 30);
+
+        catMessage.textContent =
+            `${currentCat} is taking a nap! 💤🐱`;
+
+        updateCatNeedsDisplay();
+
+    } else if (furnitureName === "Toy") {
+
+        happiness += 5;
+
+        catMessage.textContent =
+            `${currentCat} is playing! 🧶😸`;
+
+        updateHappinessDisplay();
+        updateFurnitureLocks();
+        renderMissions();
+        updateCatNeedsDisplay();
+    }
+
+    saveGame();
+});

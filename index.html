@@ -3,18 +3,23 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Cat House</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="./style.css">
+    
 </head>
 
 <body>
 
     <!-- =========================
          HEADER
-    ========================= -->
+    ========================== -->
 
     <header class="game-header">
 
@@ -22,36 +27,32 @@
 
         <div class="stats">
 
-            <div>
-                🪙 Coins:
-                <span id="coins">500</span>
-            </div>
+            <span id="coins">
+                500 🪙
+            </span>
 
-            <div>
-                ❤️ Happiness:
-                <span id="happiness">0</span>
-            </div>
+            <span id="happiness">
+                0 ❤️
+            </span>
 
-            <div>
-                ⭐ Level:
-                <span id="level">1</span>
-            </div>
+            <span id="level">
+                Level 1
+            </span>
 
-            <div class="coin-reward">
+            <span
+                id="pending-coins"
+                class="coin-reward"
+            >
+                +0 🪙
+            </span>
 
-                <button id="earn-coins">
-                    💰 Collect Coins
-                </button>
+            <button id="earn-coins">
+                💰 Collect Coins
+            </button>
 
-                <button id="restart-game">
-                    🔄 Restart Game
-                </button>
-
-                <span id="pending-coins">
-                    +0 🪙
-                </span>
-
-            </div>
+            <button id="restart-game">
+                🔄 Restart Game
+            </button>
 
         </div>
 
@@ -60,22 +61,64 @@
 
     <!-- =========================
          MAIN GAME
-    ========================= -->
+    ========================== -->
 
     <main class="game-container">
 
 
         <!-- =========================
-             CAT ROOM
-        ========================= -->
+             ROOMS
+        ========================== -->
+
+        <section class="rooms">
+
+            <h2>🏠 Rooms</h2>
+
+            <div class="room-list">
+
+                <button
+                    class="room-btn active"
+                    data-room="living-room"
+                >
+                    🛋️ Living Room
+                </button>
+
+                <button
+                    class="room-btn"
+                    data-room="bedroom"
+                >
+                    🛏️ Bedroom
+                </button>
+
+                <button
+                    class="room-btn"
+                    data-room="garden"
+                >
+                    🌳 Garden
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             ROOM
+        ========================== -->
 
         <section class="room-container">
 
-            <h2>My Cat's Room</h2>
+            <h2>🏠 Your Room</h2>
 
-            <div id="room" class="room">
+            <div
+                id="room"
+                class="room living-room"
+            >
 
-                <div id="cat" class="cat">
+                <div
+                    id="cat"
+                    class="cat"
+                >
                     🐱
                 </div>
 
@@ -85,66 +128,183 @@
 
 
         <!-- =========================
-             CAT SELECTION
-        ========================= -->
+             CAT MESSAGE
+        ========================== -->
 
-        <section class="cat-selection">
+        <section class="cat-message-section">
 
-            <h2>🐾 Choose Your Cat</h2>
+            <p
+                id="cat-message"
+                style="
+                    text-align:center;
+                    font-size:18px;
+                    margin:20px 0;
+                "
+            >
+                Choose a cat to begin!
+            </p>
 
-            <div class="cat-list">
+ <!-- CAT NEEDS -->
+        <div class="cat-needs">
 
-                <button
-                    class="cat-option"
-                    data-cat="Lem"
-                    data-icon="🐈"
-                    data-personality="Calm"
-                >
-                    <span>🐈</span>
-                    <strong>Lem</strong>
-                    <small>Calm</small>
-                </button>
+            <div class="need-bar">
+                <span class="need-label">❤️ Happiness</span>
 
+                <div class="need-progress">
+                    <div
+                        id="happiness-bar"
+                        class="need-fill"
+                        style="width: 0%;">
+                    </div>
+                </div>
 
-                <button
-                    class="cat-option"
-                    data-cat="Den"
-                    data-icon="🐈‍⬛"
-                    data-personality="Playful"
-                >
-                    <span>🐈‍⬛</span>
-                    <strong>Den</strong>
-                    <small>Playful</small>
-                </button>
-
-
-                <button
-                    class="cat-option"
-                    data-cat="Cheese"
-                    data-icon="🐅"
-                    data-personality="Friendly"
-                >
-                    <span>🐅</span>
-                    <strong>Cheese</strong>
-                    <small>Friendly</small>
-                </button>
-
+                <span id="happiness-value">0%</span>
             </div>
 
-            <p id="cat-message">
-                Choose a cat to start designing their house!
-            </p>
+
+            <div class="need-bar">
+                <span class="need-label">🍽️ Hunger</span>
+
+                <div class="need-progress">
+                    <div
+                        id="hunger-bar"
+                        class="need-fill"
+                        style="width: 100%;">
+                    </div>
+                </div>
+
+                <span id="hunger-value">100%</span>
+            </div>
+
+
+            <div class="need-bar">
+                <span class="need-label">⚡ Energy</span>
+
+                <div class="need-progress">
+                    <div
+                        id="energy-bar"
+                        class="need-fill"
+                        style="width: 100%;">
+                    </div>
+                </div>
+
+                <span id="energy-value">100%</span>
+            </div>
+
+        </div>
 
         </section>
 
 
         <!-- =========================
-             FURNITURE SHOP
-        ========================= -->
+             CAT SELECTION
+        ========================== -->
+
+        <section class="cat-selection">
+
+            <h2>🐱 Choose Your Cat</h2>
+
+            <div class="cat-list">
+
+
+                <!-- LEM -->
+
+                <div
+                    class="cat-option"
+                    data-cat="Lem"
+                    data-icon="🐈"
+                    data-personality="Calm"
+                    data-favorite="Bed"
+                >
+
+                    <span>
+                        🐈
+                    </span>
+
+                    <strong>
+                        Lem
+                    </strong>
+
+                    <small>
+                        Calm
+                    </small>
+
+                    <small>
+                        ❤️ Favorite: Bed
+                    </small>
+
+                </div>
+
+
+                <!-- DEN -->
+
+                <div
+                    class="cat-option"
+                    data-cat="Den"
+                    data-icon="🐈‍⬛"
+                    data-personality="Playful"
+                    data-favorite="Toy"
+                >
+
+                    <span>
+                        🐈‍⬛
+                    </span>
+
+                    <strong>
+                        Den
+                    </strong>
+
+                    <small>
+                        Playful
+                    </small>
+
+                    <small>
+                        ❤️ Favorite: Toy
+                    </small>
+
+                </div>
+
+
+                <!-- CHEESE -->
+
+                <div
+                    class="cat-option"
+                    data-cat="Cheese"
+                    data-icon="🐅"
+                    data-personality="Friendly"
+                    data-favorite="Cat Tree"
+                >
+
+                    <span>
+                        🐅
+                    </span>
+
+                    <strong>
+                        Cheese
+                    </strong>
+
+                    <small>
+                        Friendly
+                    </small>
+
+                    <small>
+                        ❤️ Favorite: Cat Tree
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SHOP
+        ========================== -->
 
         <section class="shop">
 
-            <h2>🛍️ Furniture Shop</h2>
+            <h2>🛒 Furniture Shop</h2>
 
             <div class="furniture-list">
 
@@ -155,22 +315,28 @@
                     class="furniture-item"
                     data-name="Bed"
                     data-price="100"
-                    data-happiness="10"
                     data-level="1"
-                    data-icon="🛏️"
                 >
 
                     <div class="furniture-icon">
                         🛏️
                     </div>
 
-                    <strong>Bed</strong>
+                    <strong>
+                        Bed
+                    </strong>
 
-                    <p>🪙 100</p>
+                    <p>
+                        🪙 100
+                    </p>
 
-                    <p>❤️ +10</p>
+                    <p>
+                        ❤️ +10
+                    </p>
 
-                    <button class="buy-button">
+                    <button
+                        class="buy-button"
+                    >
                         Buy
                     </button>
 
@@ -183,22 +349,28 @@
                     class="furniture-item"
                     data-name="Cat Tree"
                     data-price="150"
-                    data-happiness="15"
                     data-level="2"
-                    data-icon="🌳"
                 >
 
                     <div class="furniture-icon">
                         🌳
                     </div>
 
-                    <strong>Cat Tree</strong>
+                    <strong>
+                        Cat Tree
+                    </strong>
 
-                    <p>🪙 150</p>
+                    <p>
+                        🪙 150
+                    </p>
 
-                    <p>❤️ +15</p>
+                    <p>
+                        ❤️ +15
+                    </p>
 
-                    <button class="buy-button">
+                    <button
+                        class="buy-button"
+                    >
                         Buy
                     </button>
 
@@ -211,22 +383,28 @@
                     class="furniture-item"
                     data-name="Toy"
                     data-price="50"
-                    data-happiness="5"
                     data-level="1"
-                    data-icon="🧶"
                 >
 
                     <div class="furniture-icon">
                         🧶
                     </div>
 
-                    <strong>Toy</strong>
+                    <strong>
+                        Toy
+                    </strong>
 
-                    <p>🪙 50</p>
+                    <p>
+                        🪙 50
+                    </p>
 
-                    <p>❤️ +5</p>
+                    <p>
+                        ❤️ +5
+                    </p>
 
-                    <button class="buy-button">
+                    <button
+                        class="buy-button"
+                    >
                         Buy
                     </button>
 
@@ -239,22 +417,28 @@
                     class="furniture-item"
                     data-name="Food Bowl"
                     data-price="80"
-                    data-happiness="8"
                     data-level="1"
-                    data-icon="🍽️"
                 >
 
                     <div class="furniture-icon">
                         🍽️
                     </div>
 
-                    <strong>Food Bowl</strong>
+                    <strong>
+                        Food Bowl
+                    </strong>
 
-                    <p>🪙 80</p>
+                    <p>
+                        🪙 80
+                    </p>
 
-                    <p>❤️ +8</p>
+                    <p>
+                        ❤️ +8
+                    </p>
 
-                    <button class="buy-button">
+                    <button
+                        class="buy-button"
+                    >
                         Buy
                     </button>
 
@@ -267,22 +451,28 @@
                     class="furniture-item"
                     data-name="Window"
                     data-price="120"
-                    data-happiness="12"
                     data-level="2"
-                    data-icon="🪟"
                 >
 
                     <div class="furniture-icon">
                         🪟
                     </div>
 
-                    <strong>Window</strong>
+                    <strong>
+                        Window
+                    </strong>
 
-                    <p>🪙 120</p>
+                    <p>
+                        🪙 120
+                    </p>
 
-                    <p>❤️ +12</p>
+                    <p>
+                        ❤️ +12
+                    </p>
 
-                    <button class="buy-button">
+                    <button
+                        class="buy-button"
+                    >
                         Buy
                     </button>
 
@@ -295,14 +485,15 @@
 
         <!-- =========================
              INVENTORY
-        ========================= -->
+        ========================== -->
 
         <section class="inventory">
 
-            <h2>🎒 My Inventory</h2>
+            <h2>🎒 Inventory</h2>
 
             <p class="inventory-help">
-                Drag your furniture into the room.
+                Drag furniture from your inventory
+                into the room.
             </p>
 
             <div
@@ -318,23 +509,10 @@
 
         </section>
 
-        <section class="rooms">
-            <h2>🏠 Rooms</h2>
 
-            <div class="room-list">
-                <button class="room-btn active" data-room="living-room">
-                    🛋️ Living Room
-                </button>
-
-                <button class="room-btn" data-room="bedroom">
-                    🛏️ Bedroom
-                </button>
-
-                <button class="room-btn" data-room="garden">
-                    🌳 Garden
-                </button>
-            </div>
-        </section>
+        <!-- =========================
+             MISSIONS
+        ========================== -->
 
         <section class="missions">
 
@@ -343,12 +521,19 @@
             <div
                 id="mission-list"
                 class="mission-list"
-            ></div>
+            >
+
+            </div>
 
         </section>
 
+
     </main>
 
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
 
     <script src="script.js"></script>
 

@@ -1,2 +1,2 @@
 # cat-house
-House for Lem and Den 
+House for Lem, Den and Cheese
